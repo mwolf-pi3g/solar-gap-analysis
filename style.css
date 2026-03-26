@@ -126,7 +126,6 @@ h1 {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
     margin-bottom: 2rem;
-    color: black !important;
 }
 
 .input-group {
@@ -164,7 +163,12 @@ select:focus,
 textarea:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 10px var(--primary-glow);
+    box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+select option {
+    background-color: var(--background);
+    color: var(--text-main);
 }
 
 .primary-btn {
