@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Gap Analysis | NASA POWER</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <h1>Solar <span class="highlight">Gap Analysis</span></h1>
+            <p class="subtitle">Historical max consecutive "no-sun" days based on NASA POWER data (1984-2024)</p>
+
+            <p class="subtitle">How to use this tool:</p>
+            <p class="subtitle">1. Enter your latitude and longitude</p>
+            <p class="subtitle">2. Enter your system loss percentage <br />
+                (TOTAL Solar System Loss including: PV, inverter, cables, battery, etc.)</p>
+            <p class="subtitle">3. Enter your "no-sun" threshold (Wh/m²/day)</p>
+            <p class="subtitle">4. Click "Analyze Historical Gaps"</p>
+            <p class="subtitle">5. View the results;</p>
+        </header>
+
+        <section class="config-card glass">
+            <div class="input-grid">
+                <div class="input-group full-width">
+                    <label for="locations">Locations (Latitude Longitude per line)</label>
+                    <textarea id="locations" rows="5"
+                        placeholder="52.52 13.405&#10;48.85 2.352&#10;40.71 -74.00">52.52 13.405</textarea>
+                </div>
+                <div class="input-group">
+                    <label for="loss">System Loss (%)</label>
+                    <input type="number" id="loss" value="14" step="1">
+                </div>
+                <div class="input-group">
+                    <label for="threshold">"No Sun" Threshold (Wh/m²/day)</label>
+                    <input type="number" id="threshold" value="1000" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="startMonth">Start Month</label>
+                    <select id="startMonth">
+                        <option value="0">January</option>
+                        <option value="1">February</option>
+                        <option value="2">March</option>
+                        <option value="3" selected>April</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">August</option>
+                        <option value="8">September</option>
+                        <option value="9">October</option>
+                        <option value="10">November</option>
+                        <option value="11">December</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="endMonth">End Month</label>
+                    <select id="endMonth">
+                        <option value="0">January</option>
+                        <option value="1">February</option>
+                        <option value="2">March</option>
+                        <option value="3">April</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">August</option>
+                        <option value="8">September</option>
+                        <option value="9" selected>October</option>
+                        <option value="10">November</option>
+                        <option value="11">December</option>
+                    </select>
+                </div>
+            </div>
+            <button id="analyzeBtn" class="primary-btn">Analyze Historical Gaps</button>
+        </section>
+
+        <section id="resultsSection" class="results-container" style="display: none;">
+            <div class="summary-stats glass">
+                <div class="stat-item">
+                    <span class="stat-label">All-Time Max Gap</span>
+                    <span id="allTimeMax" class="stat-value">0</span>
+                    <span class="stat-unit">Days</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Average Max Gap</span>
+                    <span id="avgMaxGap" class="stat-value">0</span>
+                    <span class="stat-unit">Days</span>
+                </div>
+            </div>
+
+            <div class="table-container glass">
+                <table id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                            <th>Longest Gap</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <div id="loader" class="loader-overlay" style="display: none;">
+            <div class="spinner"></div>
+            <p>Fetching 40 years of data from NASA...</p>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
